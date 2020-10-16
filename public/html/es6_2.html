@@ -1,0 +1,92 @@
+<script>
+  //구조분해할당(비구조화할당)
+  const obj = {
+    a: 'A',
+    b: 'B',
+    c: 'C',
+    d: 'D'
+  }
+  
+  //구조분해할당
+  var {a, d} = obj;
+  console.log(a,d); //A D 
+
+
+  //이 3줄의 코드를 구조분해할당을 통해 1줄로 줄일수 있다
+  // var a = obj.a; 
+  // var b = obj.b;
+  // var c = obj.c;
+  var {a, b, c} = obj; //객체아니고 변수다 이게 구조분해할당이다
+  console.log(a, b, c); //A B C
+
+  
+  //var userid = req.body.userid;
+  //var userpw = req.body.userpw;
+  //var {userid, userpw} = req.body; //구조분해할당
+
+  //rest operator(나머지 연산자) / spread operater(펼침 연산자)
+  const fruits = ['apple', 'banana', 'mango'];
+  //const fruits2 = ['kiwi', 'orange']; 여기 사이에 넣고 싶을때 ... 펼침연산자를 사용하여 배열을 삽입한다.
+  const fruits2 = ['kiwi', ...fruits,'orange']; //...펼침 연산자이다 ["kiwi", "apple", "banana", "mango", "orange"]
+  //const fruits3 = fruits2.splice(0, 0, fruits[0], fruits[1], fruits[2]);
+  console.log(fruits2);
+
+  const newFruits = fruits.concat(fruits2); //["apple", "banana", "mango", "kiwi", "orange"] 배열 두개 합침
+  console.log(newFruits);
+
+
+
+  class Test{
+    constructor(...arg){ //arg argument의 약자로 아무거나 써도 된다 ...펼침연산으로 넣어준다.
+      this.arg = arg;
+    }
+    print(){
+      console.log(this.arg);
+    }
+  }
+  var test = new Test(); 
+  var test2 = new Test('A');
+  var test3 = new Test('A','B');
+  test.print(); //[]
+  test2.print(); //["A"]
+  test3.print(); //["A","B"]
+
+  function sample(a,b){
+    var _a = a || 10; //a가 없으면 10을 넣음 
+    var _b = b || 20; //b가 없으면 20을 넣음
+    console.log(_a + _b);
+  }
+  sample(); //30 /a와b가 존재하지 않으므로 dafault값이 적용됨
+  sample(1);//21 /a만 있고 b는 default
+  sample(1,2);//3 /a와 b 둘다 존재
+
+  //위의 내용 줄이는 방법 - '가변인자처리'라고 한다
+  function sample2(a=10, b=20){ //기본값을 저장해놓을 수 있음 만약 더 많이 넣을때는 ...arg 쓰면 된다.
+    console.log(a + b);
+  }
+  sample();
+  sample(1);
+  sample(1,2);
+
+  //Arrow Function
+  function fn(a){
+    return a * a;
+  }
+  var fn2 = function(a){
+    return a * a;
+  }
+  var fn3 = (a) => {return a * a;} //a를 주면 a*a를 곱해서 fn3에 준다. 리턴값이 있는 한줄자리 함수
+  var fn4 = a => a * a; 
+  console.log(fn3(5)); //25
+  console.log(fn4(5)); //25
+  
+  var dt = new Date();
+  console.log(zeroPlus(dt.getSeconds()));
+
+  function zeroPlus(v){
+    return v < 10 ? '0'+ v : v; //초에 한자리수일때는 0을 앞에 붙여줌 2자리는 그냥 나옴
+  }
+  var zeroPlus2 = v => v < 10 ? '0'+ v : v; //초에 한자리수일때는 0을 앞에 붙여줌 2자리는 그냥 나옴
+  console.log(zeroPlus2(dt.getSeconds()));
+
+</script>
